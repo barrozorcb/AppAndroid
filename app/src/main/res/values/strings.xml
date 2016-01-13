@@ -4,4 +4,12 @@
     <string name="title_activity_act_cad_contatos">Contatos</string>
     <string name="lnl_Nome">Nome</string>
     <string name="lbl_telefone">Telefone</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_endereco">Endereço</string>
+    <string name="lbl_datas_especiais">Datas Especiais</string>
+    <string name="lbl_grupos">Grupos</string>
+
+    <string name="lbl_salvar">Salvar</string>
+    <string name="lbl_alterar">Alterar</string>
+    <string name="lbl_excluir">Excluir</string>
 </resources>
