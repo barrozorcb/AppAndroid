@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.example.barrozo.appcontatos.databse.DataBase;
 import com.example.barrozo.appcontatos.dominio.ContatoRepository;
+import com.example.barrozo.appcontatos.dominio.entity.Contato;
 
 public class ActContato extends AppCompatActivity implements View.OnClickListener{
 
@@ -23,7 +24,7 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
     private ListView lstContatos;
     private DataBase dataBase;
     private SQLiteDatabase conn;
-    private ArrayAdapter<String> adpContatos;
+    private ArrayAdapter<Contato> adpContatos;
     private ContatoRepository contatoRepository;
 
     @Override
@@ -41,15 +42,9 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
             conn = dataBase.getWritableDatabase();
 
             contatoRepository = new ContatoRepository(conn);
-            contatoRepository.testeInserirContatos();
             adpContatos = contatoRepository.buscaContatos(this);
 
             lstContatos.setAdapter(adpContatos);
-
-            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-            dlg.setMessage("Conexão criada com sucesso");
-            dlg.setNeutralButton("OK", null);
-            dlg.show();
 
         }catch (SQLException e){
             AlertDialog.Builder dlg = new AlertDialog.Builder(this);
@@ -63,6 +58,13 @@ public class ActContato extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         Intent it = new Intent(this, ActCadContatos.class);
-        startActivity(it);
+        startActivityForResult(it, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        adpContatos = contatoRepository.buscaContatos(this);
+
+        lstContatos.setAdapter(adpContatos);
     }
 }
